@@ -23,19 +23,38 @@ const createUser = async (email, password) => {
   if (!insertInfo.acknowledged || !insertInfo.insertedId) {
     throw "Could not create a user";
   }
-  //   const newUser_id = insertInfo.insertedId.toString();
-
-  //   return await petsData.getPetById(newPet_id);
-  return user;
+  
+  newUser._id = insertInfo.insertedId.toString();
+  return newUser;
 };
 
 const checkUser = async (email, password) => {
   username = validation.checkUsername(username);
   password = validation.checkPassword(password);
-  //query the db for username
+  
+  const userCollection = await user();
+  const user = await userCollection.findOne({ email: email });
 
-  //compare the password
+  if (!user) {
+    throw "User not found";
+  }
+
+  const passwordMatch = await bcrypt.compare(password, user.password);
+  if (!passwordMatch) {
+    throw "Invalid email or password";
+  }
+
+  return user;
 };
+
+async getPetById(petId) {
+  if (petId === undefined) throw 'must provide petId'
+  const petCollection = await pets()
+  let pet = await petCollection.findOne({ _id: ObjectId(petId) })
+  if (pet === null) throw 'No pet with that id';
+  delete pet.hashed_password;
+  return pet
+},
 
 export default {
   createUser,

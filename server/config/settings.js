@@ -13,6 +13,6 @@
 /* This is docker container */
 export const mongoConfig = {
   serverUrl:
-    "mongodb://mongo:27017/?useNewUrlParser=true&useUnifiedTopology=true",
+    "mongodb+srv://xiaweih610:LPkMMdq2PfvJdfTl@lecture9hw.doboqem.mongodb.net/",
   database: "ProductManagement",
 };
