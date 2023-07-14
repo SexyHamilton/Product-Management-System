@@ -1,5 +1,4 @@
-import {MongoClient} from 'mongodb';
-import {mongoConfig} from './settings.js';
+import { MongoClient } from "mongodb";
 
 let _connection = undefined;
 let _db = undefined;
@@ -16,4 +15,8 @@ const closeConnection = async () => {
   await _connection.close();
 };
 
-export {dbConnection, closeConnection};
+const mongoConfig = {
+  serverUrl: "mongodb://localhost:27017/",
+  database: "Hanyu_Wang",
+};
+export { dbConnection, closeConnection, mongoConfig };
