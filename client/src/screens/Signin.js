@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Signin() {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -72,6 +73,7 @@ export default function Signin() {
       user = await loginUser(user);
       console.log(user);
       alert("You have successfully login!");
+      navigate("/");
     } catch (e) {
       alert(e);
     }
