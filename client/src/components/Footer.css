@@ -2,12 +2,13 @@
     height: 85px;
     width: 100%;
     background-color: #111827;
-    position: absolute;
+    position: sticky;
     bottom: 0;
     display: flex;
     justify-content: space-around;
     color: white;
     align-items: center;
+    margin-top: 6vw;
 }
 
 /* media */
