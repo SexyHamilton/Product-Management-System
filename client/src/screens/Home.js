@@ -23,7 +23,7 @@ export default function Home() {
     const classes = useStyles();
 
     return (
-        <div>
+        <div className="home" style={{ "min-height": "36vw" }}>
             <h1>Products</h1>
             {/* Filter */}
             <Link to="/create">
