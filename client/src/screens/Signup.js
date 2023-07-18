@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import validation from "../validation/signup";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Signup() {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleEmailChange = (event) => {
@@ -56,6 +57,7 @@ export default function Signup() {
       };
       await createUser(newUser);
       alert("You have successfully create an account!");
+      navigate("/");
     } catch (e) {
       alert(e);
     }
