@@ -11,15 +11,15 @@ const exportMethods = {
     if (name === "") {
       throw "name cannot be empty string or spaces only!";
     }
-    const spaceRegex = /\s/;
-    if (spaceRegex.test(name)) {
-      throw "name must not contain space!";
-    }
-    name = name.toLowerCase();
-    const alphanumericRegex = /^\w+$/;
-    if (!alphanumericRegex.test(name)) {
-      throw "name must contain letters and numbers only!";
-    }
+    // const spaceRegex = /\s/;
+    // if (spaceRegex.test(name)) {
+    //   throw "name must not contain space!";
+    // }
+    // name = name.toLowerCase();
+    // const alphanumericRegex = /^\w+$/;
+    // if (!alphanumericRegex.test(name)) {
+    //   throw "name must contain letters and numbers only!";
+    // }
     return name;
   },
 
