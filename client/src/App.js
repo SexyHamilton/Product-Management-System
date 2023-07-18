@@ -12,11 +12,11 @@ import ErrorPage from "./screens/ErrorPage";
 function App() {
     return (
         <BrowserRouter>
-            <div>
+            <div className="body">
                 <header>
                     <Header />
                 </header>
-                <main>
+                <main className="main_content">
                     <Routes>
                         <Route path="/" element={<Home />}></Route>
                         <Route path="/login" element={<Signin />}></Route>
