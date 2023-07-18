@@ -8,31 +8,34 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CreateProduct from "./screens/CreateProduct";
 import ErrorPage from "./screens/ErrorPage";
+import { AuthContextProvider } from "./screens/context/AuthContext";
 
 function App() {
     return (
         <BrowserRouter>
-            <div className="body">
-                <header>
-                    <Header />
-                </header>
-                <main className="main_content">
-                    <Routes>
-                        <Route path="/" element={<Home />}></Route>
-                        <Route path="/login" element={<Signin />}></Route>
-                        <Route path="/signup" element={<Signup />}></Route>
-                        <Route path="/update" element={<Update />}></Route>
-                        <Route
-                            path="/create"
-                            element={<CreateProduct />}
-                        ></Route>
-                        <Route path="/*" element={<ErrorPage />} />
-                    </Routes>
-                </main>
-                <footer>
-                    <Footer />
-                </footer>
-            </div>
+            <AuthContextProvider>
+                <div className="body">
+                    <header>
+                        <Header />
+                    </header>
+                    <main className="main_content">
+                        <Routes>
+                            <Route path="/" element={<Home />}></Route>
+                            <Route path="/login" element={<Signin />}></Route>
+                            <Route path="/signup" element={<Signup />}></Route>
+                            <Route path="/update" element={<Update />}></Route>
+                            <Route
+                                path="/create"
+                                element={<CreateProduct />}
+                            ></Route>
+                            <Route path="/*" element={<ErrorPage />} />
+                        </Routes>
+                    </main>
+                    <footer>
+                        <Footer />
+                    </footer>
+                </div>
+            </AuthContextProvider>
         </BrowserRouter>
     );
 }

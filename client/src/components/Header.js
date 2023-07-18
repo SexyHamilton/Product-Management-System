@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../screens/context/AuthContext";
 
 function Header() {
+    const { loggedIn } = useContext(AuthContext);
+
     return (
         <div className="header">
             <div className="header__title">
@@ -26,10 +29,21 @@ function Header() {
             </div>
             <div className="header__nav">
                 <div className="header__signin">
-                    <Link className="header__loginLink" to="/login">
-                        <ManageAccountsIcon className="header__signinIcon" />
-                        <span className="header__signinLabel">Sign In</span>
-                    </Link>
+                    {loggedIn ? (
+                        // If userInfo exists, show logout link
+                        <Link className="header__logoutLink" to="/profile">
+                            <ManageAccountsIcon className="header__signinIcon" />
+                            <span className="header__signoutLabel">
+                                Sign Out
+                            </span>
+                        </Link>
+                    ) : (
+                        // If userInfo does not exist, show sign in link
+                        <Link className="header__loginLink" to="/login">
+                            <ManageAccountsIcon className="header__signinIcon" />
+                            <span className="header__signinLabel">Sign In</span>
+                        </Link>
+                    )}
                 </div>
                 <div className="header__cart">
                     <ShoppingCartIcon className="header__cartIcon" />

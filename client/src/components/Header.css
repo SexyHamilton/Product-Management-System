@@ -70,7 +70,8 @@ a.header__homeLink {
 }
 
 /* sign in */
-a.header__loginLink {
+a.header__loginLink,
+a.header__logoutLink {
     color: white;
     text-decoration: none;
     display: flex;
