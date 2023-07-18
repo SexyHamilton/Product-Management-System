@@ -1,0 +1,131 @@
+.header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    background-color: #111827;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    justify-content: space-between;
+    margin-bottom: 6vw;
+}
+
+/* title */
+a.header__homeLink {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+}
+
+.header__title {
+    display: flex;
+    align-items: baseline;
+    color: white;
+    margin-left: 8vw;
+}
+
+.header__title1 {
+    margin: 2px;
+    font-size: 25px;
+}
+
+.header__title2 {
+    margin: 2px;
+    font-size: 10px;
+}
+
+/* search */
+.header__search {
+    display: flex;
+    position: relative;
+    left: -30px;
+}
+
+.header__searchInput {
+    width: 30vw;
+    height: 48px;
+    border: 1px #cccccc solid;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+    padding-left: 12px;
+}
+
+.header__iconContainer {
+    width: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 1px #cccccc solid;
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.header__searchIcon {
+    color: #cccccc;
+    font-size: 25px !important;
+}
+
+/* sign in */
+a.header__loginLink {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.header__nav {
+    width: 15%;
+    color: white;
+    display: flex;
+    margin-right: 4vw;
+    justify-content: space-between;
+}
+
+.header__signinIcon {
+    font-size: 30px !important;
+}
+
+.header__signinLabel,
+.header__cartLabel {
+    padding: 10px;
+}
+
+.header__signin,
+.header__cart {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header__title {
+        margin: 1rem;
+    }
+
+    .header__searchInput {
+        max-width: 200px;
+    }
+
+    .header__iconContainer {
+        width: 10%;
+    }
+}
+
+@media (max-width: 576px) {
+    .header__title {
+        margin: 0.5rem;
+    }
+
+    .header__searchInput {
+        max-width: 150px;
+        font-size: 14px;
+    }
+
+    .header__iconContainer {
+        width: 8%;
+    }
+}

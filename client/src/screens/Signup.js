@@ -108,7 +108,7 @@ export default function Signup() {
         Create account
       </Button>
       <p>
-        Already have an account?<Link to="/signin">Sign in</Link>
+        Already have an account?<Link to="/login">Sign in</Link>
       </p>
     </form>
   );

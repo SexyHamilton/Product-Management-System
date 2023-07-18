@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button } from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
+// import { ProfileContext } from "./context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -39,6 +40,24 @@ export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // //set user profile as global state
+  // const [userProfile, setUserProfile] = useContext(ProfileContext);
+  // const userProfileFromLocalStorage = JSON.parse(
+  //   sessionStorage.getItem("userInfo")
+  // );
+
+  // useEffect(() => {
+  //   // Redirects to Home page if user is already logged in
+  //   if (userProfile || userProfileFromLocalStorage) {
+  //     navigate("/", { replace: true });
+  //   }
+  //   window.onstorage = (event) => {
+  //     if (event.key === "userProfile") {
+  //       window.location.reload();
+  //     }
+  //   };
+  // }, [userProfile, navigate, setUserProfile, userProfileFromLocalStorage]);
+
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -71,9 +90,14 @@ export default function Signin() {
     };
     try {
       user = await loginUser(user);
-      console.log(user);
+      // setUserProfile(user);
+      // console.log(userProfile);
+      // const userStr = JSON.stringify(user);
+      // sessionStorage.setItem("userInfo", userStr);
       alert("You have successfully login!");
-      navigate("/");
+      setTimeout(() => {
+        navigate("/", { state: { user: user } });
+      }, 1000);
     } catch (e) {
       alert(e);
     }
