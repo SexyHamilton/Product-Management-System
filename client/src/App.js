@@ -7,6 +7,7 @@ import Update from "./screens/Update";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CreateProduct from "./screens/CreateProduct";
+import ErrorPage from "./screens/ErrorPage";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                             path="/create"
                             element={<CreateProduct />}
                         ></Route>
+                        <Route path="/*" element={<ErrorPage />} />
                     </Routes>
                 </main>
                 <footer>

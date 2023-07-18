@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Button } from "@material-ui/core";
+import {
+    TextField,
+    Button,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel,
+} from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
 import InputAdornment from "@mui/material/InputAdornment";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -19,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
     },
     textField: {
+        margin: theme.spacing(1),
+        width: "100%",
+    },
+    select: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
+    formControl: {
         margin: theme.spacing(1),
         width: "100%",
     },
@@ -78,6 +94,22 @@ export default function CreateProduct() {
     };
 
     // Create product function
+    const createProduct = async (product) => {
+        try {
+            const response = await axios.post(
+                "http://localhost:4000/createProduct",
+                product
+            );
+            console.log("Product created:", response.data);
+            return response.data;
+        } catch (error) {
+            if (error.response && error.response.data) {
+                console.log("Error creating Product:", error.response.data);
+                throw error.response.data.Error;
+            }
+            throw new Error("Cannot create product");
+        }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -87,9 +119,11 @@ export default function CreateProduct() {
             category: category,
             price: price,
             stock_quantity: stock_quantity,
-            image: image,
+            link: image,
         };
+
         try {
+            await createProduct(product);
             /* use Create product function */
             alert("You have successfully add a product!");
             navigate("/");
@@ -112,8 +146,8 @@ export default function CreateProduct() {
                     <TextField
                         className={classes.textField}
                         id="create-name"
-                        label="name"
-                        placeholder="none"
+                        // label="name"
+                        // placeholder="none"
                         variant="outlined"
                         color="secondary"
                         value={name}
@@ -129,7 +163,7 @@ export default function CreateProduct() {
                     <TextField
                         className={classes.textField}
                         id="create-description"
-                        label="description"
+                        // place="description"
                         variant="outlined"
                         color="secondary"
                         value={description}
@@ -149,20 +183,56 @@ export default function CreateProduct() {
                     }}
                 >
                     <div style={{ width: "49%" }}>
-                        <label className={classes.label} for="create-category">
-                            Category
-                        </label>
-                        <TextField
-                            className={classes.textField}
-                            id="create-description"
-                            label="category"
-                            variant="outlined"
-                            color="secondary"
-                            value={category}
-                            onChange={handleCategoryChange}
-                            select
-                        />
+                        {/* <label className={classes.label} for="create-category">
+              Category
+            </label>
+            <TextField
+              className={classes.textField}
+              id="create-category"
+              // label="category"
+              variant="outlined"
+              color="secondary"
+              value={category}
+              onChange={handleCategoryChange}
+              select
+            /> */}
+                        <FormControl className={classes.formControl}>
+                            <label
+                                className={classes.label}
+                                for="create-category"
+                            >
+                                Category
+                            </label>
+                            <Select
+                                className={classes.select}
+                                labelId="category"
+                                id="create-category"
+                                value={category}
+                                onChange={handleCategoryChange}
+                                required
+                            >
+                                <MenuItem value="costumes">Costumes</MenuItem>
+                                <MenuItem value="shoes-accessories">
+                                    Shoes & Accessories
+                                </MenuItem>
+                                <MenuItem value="makeup-skincare">
+                                    Makeup & Skin-care
+                                </MenuItem>
+                                <MenuItem value="snack">
+                                    Snack & Beverage
+                                </MenuItem>
+                                <MenuItem value="jewelry">Jewelry</MenuItem>
+                                <MenuItem value="furniture">Furniture</MenuItem>
+                                <MenuItem value="digital-products">
+                                    Digital Products
+                                </MenuItem>
+                                <MenuItem value="baby-products">
+                                    Baby Products
+                                </MenuItem>
+                            </Select>
+                        </FormControl>
                     </div>
+
                     <div style={{ width: "49%" }}>
                         <label className={classes.label} for="create-price">
                             Price
@@ -170,7 +240,7 @@ export default function CreateProduct() {
                         <TextField
                             className={classes.textField}
                             id="create-price"
-                            label="price"
+                            // label="price"
                             variant="outlined"
                             color="secondary"
                             value={price}
@@ -193,7 +263,7 @@ export default function CreateProduct() {
                         <TextField
                             className={classes.textField}
                             id="create-stock"
-                            label="stock_quantity"
+                            // label="stock_quantity"
                             variant="outlined"
                             color="secondary"
                             value={stock_quantity}
@@ -207,11 +277,11 @@ export default function CreateProduct() {
                         <TextField
                             className={classes.textField}
                             id="create-image"
-                            label="price"
+                            // label="http://"
                             variant="outlined"
                             color="secondary"
-                            value={price}
-                            onChange={handlePriceChange}
+                            value={image}
+                            onChange={handleImageChange}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -219,7 +289,6 @@ export default function CreateProduct() {
                                             className={classes.button}
                                             variant="contained"
                                             color="primary"
-                                            type="submit"
                                         >
                                             Upload
                                         </Button>

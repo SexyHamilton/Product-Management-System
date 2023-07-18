@@ -24,10 +24,9 @@ const createUser = async (email, password) => {
   if (!insertInfo.acknowledged || !insertInfo.insertedId) {
     throw "Could not create a user";
   }
-  //   const newUser_id = insertInfo.insertedId.toString();
+  const newUser_id = insertInfo.insertedId.toString();
 
-  //   return await petsData.getPetById(newPet_id);
-  return newUser;
+  return await getUserById(newUser_id);
 };
 
 const checkUser = async (email, password) => {
