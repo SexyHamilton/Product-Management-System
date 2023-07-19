@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button } from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../screens/context/AuthContext";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, setUserInfo } from "../screens/context/userSlice";
 // import { ProfileContext } from "./context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +44,7 @@ export default function Signin() {
     const [password, setPassword] = useState("");
 
     const { setLoggedIn } = useContext(AuthContext);
+    const dispatch = useDispatch();
 
     // //set user profile as global state
     // const [userProfile, setUserProfile] = useContext(ProfileContext);
@@ -101,6 +104,9 @@ export default function Signin() {
 
             // After successful login, update the loggedIn state to true
             setLoggedIn(true);
+            const userStr = JSON.stringify(user);
+            dispatch(setUserInfo(userStr));
+            console.log("userStr: ", userStr);
 
             // After successful login, store user info in session storage
             // sessionStorage.setItem("isLoggedIn", true);
