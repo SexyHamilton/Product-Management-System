@@ -36,17 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-
-.words {
-  display: flex;
-  justify-content: space-between;
-  max-height: 100px;
-  
-}
-
-.forget-pd {
-  display: flex;
-  margin-right: 10px;
-  
-}
