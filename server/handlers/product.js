@@ -2,9 +2,10 @@ const db = require("../models");
 
 //POST - /users/:id/products
 exports.createProduct = async function (req, res, next) {
+  console.log(req.params.id);
   try {
     // create a product
-    const product = db.Product.create({
+    const product = await db.Product.create({
       name: req.body.name,
       description: req.body.description,
       category: req.body.category,
@@ -14,11 +15,12 @@ exports.createProduct = async function (req, res, next) {
       user: req.params.id,
     });
     //find the user
+    console.log(req.params.id);
     const user = await db.User.findById(req.params.id);
     //push the created product into user's product list
-    user.products.push(product.id);
+    await user.products.push(product.id);
     await user.save();
-
+    console.log(product._id);
     const returnProduct = await db.Product.findById(product._id).populate(
       "user",
       {
@@ -65,8 +67,10 @@ exports.getAllProducts = async function (req, res, next) {
 
 // GET - /users/:id/products/:product_id
 exports.getProduct = async function (req, res, next) {
+  console.log(req.params.id);
+  console.log(req.params.product_id);
   try {
-    const product = await db.Product.findById(req.params.product._id);
+    const product = await db.Product.findById(req.params.product_id);
     return res.status(200).json({ product });
   } catch (err) {
     return next(err);

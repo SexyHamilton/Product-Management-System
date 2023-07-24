@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 //routes here
 app.use("/auth", authRouter);
-app.use("/users/:id/products", productRouter);
+app.use("/users", productRouter);
 
 //after using those routes, if any error got, invokes here
 app.use((req, res, next) => {

@@ -9,9 +9,19 @@ const {
 const { loginRequired, ensureCorrectUser } = require("../middleware/auth");
 
 //
-router.get("/", loginRequired, getAllProducts);
-router.get("/:product_id", loginRequired, ensureCorrectUser, getProduct);
-router.post("/", loginRequired, createProduct);
-router.patch("/:product_id", loginRequired, ensureCorrectUser, updateProduct);
+router.get("/:id/products", loginRequired, getAllProducts);
+router.get(
+  "/:id/products/:product_id",
+  loginRequired,
+  ensureCorrectUser,
+  getProduct
+);
+router.post("/:id/products", loginRequired, createProduct);
+router.patch(
+  "/:id/products/:product_id",
+  loginRequired,
+  ensureCorrectUser,
+  updateProduct
+);
 
 module.exports = router;
