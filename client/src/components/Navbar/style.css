@@ -1,0 +1,133 @@
+.header__homeLink {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+}
+
+.header__title1 {
+    margin: 2px;
+    font-size: 25px;
+}
+
+.header__title2 {
+    margin: 2px;
+    font-size: 10px;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .nav-header {
+    border-bottom: 0;
+    padding: 0 4px 0 24px;
+  }
+  
+  .logo {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  
+  .logo a {
+    display: inline-block;
+    font-size: 20px;
+    text-transform: capitalize;
+  }
+  
+  .navbar-menu {
+    float: left;
+  }
+  
+  .navbar-menu .ant-layout-header {
+    padding: 0 20px;
+  }
+  
+  .navbar-menu .ant-menu-horizontal {
+    border-bottom: 0;
+  }
+  
+  .navbar-menu .ant-menu-item {
+    padding-bottom: 0px;
+  }
+  
+  .navbar-menu .leftMenu {
+    float: left;
+  }
+  
+  .ant-menu {
+    background-color: transparent;
+    border-bottom: none;
+    color: white;
+  }
+  
+  .navbar-menu .rightMenu {
+    float: right;
+  }
+  
+  .menuButton {
+    float: right;
+    height: 32px;
+    padding: 6px;
+    margin-top: 14px;
+    display: none;
+    background: none;
+    margin-right: 10px;
+  }
+  
+  .ant-drawer-body {
+    padding: 0;
+  }
+  
+  .ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
+  .ant-drawer-body .ant-menu-horizontal > .ant-menu-submenu {
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .ant-drawer-body .ant-menu-horizontal {
+    border-bottom: none;
+  }
+  
+  .ant-drawer-body .ant-menu-horizontal > .ant-menu-item:hover {
+    border-bottom-color: transparent;
+  }
+  
+  .ant-drawer-body .ant-menu-horizontal > .ant-menu-item:hover::after {
+    border-bottom-color: tomato;
+  }
+  
+  .username {
+    display: none;
+    margin-left: 8px;
+  }
+  
+  @media (max-width: 767px) {
+    .menuButton {
+      display: block;
+      margin-right: 10px;
+      color: white;
+    }
+  
+    .leftMenu,
+    .rightMenu {
+      display: none;
+    }
+  
+    .ant-menu {
+      color: black;
+    }
+  
+    .logo a {
+      margin-left: -10px;
+    }
+  
+    .ant-drawer-title > .brand-font {
+      margin-bottom: 0;
+    }
+  
+    .username {
+      display: inline-block;
+    }
+  }

@@ -1,0 +1,10 @@
+.words {
+    display: flex;
+    justify-content: space-between;
+    max-height: 100px;
+}
+
+.forget_pd {
+    display: flex;
+    margin-right: 10px;
+}
