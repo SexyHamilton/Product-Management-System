@@ -57,7 +57,7 @@ export default function LogIn() {
     };
     console.log(user);
     dispatch(authUser(user)).then(() => {
-      navigate(location.state?.from || "/");
+      navigate("/");
     });
   };
 

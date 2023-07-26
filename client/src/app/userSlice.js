@@ -50,6 +50,7 @@ const userSlice = createSlice({
       state.isAuthenticated = false;
       state.user = {};
       state.status = "idle";
+      localStorage.removeItem("token");
     },
   },
   extraReducers: (builder) => {

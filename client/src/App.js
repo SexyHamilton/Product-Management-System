@@ -4,8 +4,9 @@ import Layout from "components/Layout";
 import Login from "pages/Login";
 import Signup from "pages/Signup";
 import { useSelector } from "react-redux";
-import AuthLayout from "components/Layout/AuthLayout";
+import Home from "pages/Home";
 import NewProduct from "pages/Product/NewProduct";
+import NotFound from "pages/NotFound";
 function App() {
   return (
     <BrowserRouter>
@@ -14,21 +15,11 @@ function App() {
           <Route index element={<Home />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
-          <Route path="app" element={<AuthLayout />}>
-            <Route path="new-product" element={<NewProduct />} />
-          </Route>
+          <Route path="new-product" element={<NewProduct />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      Home
-      <Link to="/app/new-product">Add Product</Link>
-    </div>
   );
 }
 
