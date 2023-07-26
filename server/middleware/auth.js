@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 //make sure the user is logged in  -Authentication
 exports.loginRequired = async function (req, res, next) {
   try {
-    console.log(req.headers);
+    // console.log(req.headers);
     const token = req.headers.authorization.split(" ")[1]; //Bearer token
     const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
     if (decoded) {

@@ -15,12 +15,11 @@ exports.createProduct = async function (req, res, next) {
       user: req.params.id,
     });
     //find the user
-    console.log(req.params.id);
+    console.log(product);
     const user = await db.User.findById(req.params.id);
     //push the created product into user's product list
     await user.products.push(product.id);
     await user.save();
-    console.log(product._id);
     const returnProduct = await db.Product.findById(product._id).populate(
       "user",
       {
