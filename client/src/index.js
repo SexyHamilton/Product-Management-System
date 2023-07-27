@@ -6,11 +6,20 @@ import { Provider } from "react-redux";
 import store from "./app/store";
 import "antd/dist/reset.css";
 import "./index.css";
+import jwtDecode from "jwt-decode";
+import { setCurrentUser } from "app/userSlice";
+import { StyleProvider } from "@ant-design/cssinjs";
+
+if (localStorage.getItem("token")) {
+  store.dispatch(setCurrentUser(jwtDecode(localStorage.getItem("token"))));
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <App />
+    <StyleProvider hashPriority="low">
+      <App />
+    </StyleProvider>
   </Provider>
 );
 
