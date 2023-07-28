@@ -8,7 +8,7 @@ const RightMenu = ({ mode }) => {
   return (
     <Menu mode={mode}>
       <Menu.Item key="Chuwa-management">
-        <Link className="header__homelink" to="/cart">
+        <Link className="header__homelink" to="cart">
           <ShoppingCartOutlined />
         </Link>
       </Menu.Item>

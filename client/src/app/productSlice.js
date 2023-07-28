@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createProduct } from "services/product";
+import { createProduct, updateProduct, fetchProducts } from "services/product";
+import { removeError, addError } from "./errorSlice";
 
 const initialState = {
   products: [],
@@ -11,11 +12,26 @@ export const createProductAction = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const product = await createProduct(data);
-      //   thunkAPI.dispatch(removeError());
+      thunkAPI.dispatch(removeError());
       return product;
     } catch (error) {
       const { message } = error;
-      //   thunkAPI.dispatch(addError(message));
+      thunkAPI.dispatch(addError(message));
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const fetchProductsAction = createAsyncThunk(
+  "products/fetchProducts",
+  async (data, thunkAPI) => {
+    try {
+      const products = await fetchProducts(data);
+      thunkAPI.dispatch(removeError());
+      return products;
+    } catch (error) {
+      const { message } = error;
+      thunkAPI.dispatch(addError(message));
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -35,6 +51,16 @@ const productSlice = createSlice({
     });
     builder.addCase(createProductAction.rejected, (state, action) => {
       state.status = "failed";
+    });
+    builder.addCase(fetchProductsAction.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.products = action.payload;
+    });
+    builder.addCase(fetchProductsAction.rejected, (state, action) => {
+      state.status = "failed";
+    });
+    builder.addCase(fetchProductsAction.pending, (state, action) => {
+      state.status = "pending";
     });
   },
 });

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link, Navigate } from "react-router-dom";
-// import MessageTimeline from 'pages/Message';
+import ProductTimeline from "pages/Product";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -33,6 +33,8 @@ export default function Home() {
       <Link to="new-product">
         <button className={classes.button}>Add Product</button>
       </Link>
+
+      <ProductTimeline />
     </div>
   );
 }

@@ -180,6 +180,7 @@ export default function NewProduct() {
                 </MenuItem>
                 <MenuItem value="makeup-skincare">Makeup & Skin-care</MenuItem>
                 <MenuItem value="snack">Snack & Beverage</MenuItem>
+                <MenuItem value="toys">Toys</MenuItem>
                 <MenuItem value="jewelry">Jewelry</MenuItem>
                 <MenuItem value="furniture">Furniture</MenuItem>
                 <MenuItem value="digital-products">Digital Products</MenuItem>

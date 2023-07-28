@@ -61,8 +61,8 @@ export default function Signup() {
       <h1>Sign up an account</h1>
       <TextField
         className={classes.textField}
-        id="signup-username"
-        label="Username"
+        id="signup-email"
+        label="Email"
         variant="outlined"
         color="secondary"
         value={email}

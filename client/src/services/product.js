@@ -7,3 +7,18 @@ export const createProduct = async ({ userId, details }) => {
     data: details,
   });
 };
+
+export const fetchProducts = async () => {
+  return await apiCall({
+    url: "/products",
+    method: "GET",
+  });
+};
+
+export const updateProduct = async ({ userId, productId }) => {
+  console.log(userId, productId);
+  return await apiCall({
+    url: `/users/${userId}/products/${productId}`,
+    method: "PATCH",
+  });
+};
