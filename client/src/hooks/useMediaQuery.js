@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-export const useMediaQuery = (query = '(max-width: 450px)') => {
+export const useMediaQuery = (query = "(max-width: 450px)") => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
@@ -11,8 +11,8 @@ export const useMediaQuery = (query = '(max-width: 450px)') => {
     const listener = () => {
       setMatches(media.matches);
     };
-    media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
   }, [matches, query]);
 
   return matches;

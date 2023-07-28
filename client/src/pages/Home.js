@@ -6,17 +6,17 @@ import { Link, Navigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   button: {
-      width: "133px",
-      height: "40px",
-      border: "none",
-      "border-radius": "5px",
-      textTransform: "none",
-      margin: theme.spacing(1),
-      backgroundColor: "#5048E5",
-      color: "#FFFFFF",
-      "&:hover": {
-          backgroundColor: "#512da8",
-      },
+    width: "133px",
+    height: "40px",
+    border: "none",
+    "border-radius": "5px",
+    textTransform: "none",
+    margin: theme.spacing(1),
+    backgroundColor: "#5048E5",
+    color: "#FFFFFF",
+    "&:hover": {
+      backgroundColor: "#512da8",
+    },
   },
 }));
 
