@@ -101,7 +101,7 @@ export default function LogIn() {
           </p>
         </div>
         <div className={styles.forget_pd}>
-          <Link to="/update">Forget password?</Link>
+          <Link to="/updatePassword">Forget password?</Link>
         </div>
       </form>
     </div>

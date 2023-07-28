@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Home from "pages/Home";
 import NewProduct from "pages/Product/NewProduct";
 import NotFound from "pages/NotFound";
+import UpdatePassword from "pages/UpdatePassword";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +16,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
+          <Route path="updatePassword" element={<UpdatePassword />} />
           <Route path="new-product" element={<NewProduct />} />
           <Route path="*" element={<NotFound />} />
         </Route>
