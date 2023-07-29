@@ -98,6 +98,7 @@ export default function ProductList() {
                                         fontSize: "16px",
                                         fontWeight: "600",
                                         marginBottom: "4px",
+                                        color: "#111827",
                                     }}
                                 >
                                     ${item.price}
