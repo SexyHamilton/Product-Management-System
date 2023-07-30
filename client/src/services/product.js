@@ -15,10 +15,18 @@ export const fetchProducts = async () => {
   });
 };
 
-export const updateProduct = async ({ userId, productId }) => {
+export const updateProduct = async ({ userId, productId, details }) => {
   console.log(userId, productId);
   return await apiCall({
     url: `/users/${userId}/products/${productId}`,
     method: "PATCH",
+    data: details,
+  });
+};
+export const fetchOneProduct = async (userId, productId) => {
+  console.log(userId, productId);
+  return await apiCall({
+    url: `/users/${userId}/products/${productId}`,
+    method: "GET",
   });
 };
