@@ -10,6 +10,7 @@ import { removeError, addError } from "./errorSlice";
 const initialState = {
   products: [],
   status: "idle",
+  currentProduct: {},
 };
 
 export const createProductAction = createAsyncThunk(
@@ -57,6 +58,21 @@ export const updateProductAction = createAsyncThunk(
   }
 );
 
+export const fetchOneProductAction = createAsyncThunk(
+  "products/fetchOneProduct",
+  async (data, thunkAPI) => {
+    try {
+      const product = fetchOneProduct(data);
+      thunkAPI.dispatch(removeError());
+      return product;
+    } catch (error) {
+      const { message } = error;
+      thunkAPI.dispatch(addError(message));
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const productSlice = createSlice({
   name: "products",
   initialState,
@@ -80,6 +96,25 @@ const productSlice = createSlice({
       state.status = "failed";
     });
     builder.addCase(fetchProductsAction.pending, (state, action) => {
+      state.status = "pending";
+    });
+    builder.addCase(updateProductAction.fulfilled, (state, action) => {
+      state.status = "succeeded";
+    });
+    builder.addCase(updateProductAction.rejected, (state, action) => {
+      state.status = "failed";
+    });
+    builder.addCase(updateProductAction.pending, (state, action) => {
+      state.status = "pending";
+    });
+    builder.addCase(fetchOneProductAction.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.currentProduct = action.payload;
+    });
+    builder.addCase(fetchOneProductAction.rejected, (state, action) => {
+      state.status = "failed";
+    });
+    builder.addCase(fetchOneProductAction.pending, (state, action) => {
       state.status = "pending";
     });
   },

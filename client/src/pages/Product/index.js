@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { List, Skeleton, Button, Typography, Card } from "antd";
+import { List, Skeleton, Button, Card } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductsAction } from "app/productSlice";
 import style from "./style.module.css";
 import { Link, Navigate } from "react-router-dom";
-import { Padding } from "@mui/icons-material";
-import NewProduct from "./NewProduct";
 
 export default function ProductList() {
   const dispatch = useDispatch();

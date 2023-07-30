@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import InputAdornment from "@mui/material/InputAdornment";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
+import validation from "validation/product";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -119,42 +120,53 @@ export default function NewProduct() {
 
   const onSubmit = (data) => {
     data.preventDefault();
-    let newProduct = {
-      name: name,
-      description: description,
-      category: category,
-      price: price,
-      quantity: stock_quantity,
-      link: link,
-    };
-    console.log(newProduct);
-    dispatch(
-      createProductAction({ userId: user.id, details: newProduct })
-    ).then(() => {
-      navigate("/");
-    });
+    let newProduct = undefined;
+    try {
+      newProduct = {
+        name: validation.checkName(name),
+        description: validation.checkDescription(description),
+        category: validation.checkCategory(category),
+        price: validation.checkPrice(price),
+        quantity: validation.checkQuantity(stock_quantity),
+        link: validation.checkLink(link),
+      };
+      console.log(newProduct);
+      dispatch(
+        createProductAction({ userId: user.id, details: newProduct })
+      ).then(() => {
+        alert("You have successfully create a product");
+        navigate("/");
+      });
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const onUpdate = (data) => {
     data.preventDefault();
-    let updateProduct = {
-      name: name,
-      description: description,
-      category: category,
-      price: price,
-      quantity: stock_quantity,
-      link: link,
-    };
-    console.log(updateProduct);
-    dispatch(
-      updateProductAction({
-        userId: user.id,
-        productId: productId,
-        details: updateProduct,
-      })
-    ).then(() => {
-      navigate("/");
-    });
+    let updateProduct = undefined;
+    try {
+      updateProduct = {
+        name: validation.checkName(name),
+        description: validation.checkDescription(description),
+        category: validation.checkCategory(category),
+        price: validation.checkPrice(price),
+        quantity: validation.checkQuantity(stock_quantity),
+        link: validation.checkLink(link),
+      };
+      console.log(updateProduct);
+      dispatch(
+        updateProductAction({
+          userId: user.id,
+          productId: productId,
+          details: updateProduct,
+        })
+      ).then(() => {
+        navigate("/");
+      });
+    } catch (error) {
+      alert(error);
+    }
   };
   return (
     <div style={{ maxWidth: "660px", margin: "50px auto 50px auto" }}>
