@@ -24,3 +24,45 @@
     max-width: 100%;
     max-height: 100%;
 }
+
+.product_detail {
+    margin-top: 5vh;
+}
+
+.product_detail_container {
+    background-color: white;
+    margin: 0 auto;
+    height: 65vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.product_detail_image_container {
+    /* border: solid red 1px; */
+    width: 60%;
+    height: 82%;
+}
+
+.product_detail_info_container {
+    /* border: solid green 1px; */
+    width: 40%;
+    height: 82%;
+    padding: 40px 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.product_detail_row3_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 13px;
+    margin-top: 8px;
+}
+
+.product_detail_row5 {
+    margin-top: 30px;
+}
