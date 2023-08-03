@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { fetchOneProductAction } from "app/productSlice";
@@ -7,6 +7,10 @@ import { Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "@emotion/styled";
 import style from "./style.module.css";
+import Tooltip from "@material-ui/core/Tooltip";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { Visibility } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
     buttonRed: {
@@ -40,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: "#512da8",
         },
     },
+
+    edit_button: {
+        width: "133px",
+        height: "40px",
+    },
 }));
 
 export default function ProductDetail() {
@@ -49,6 +58,15 @@ export default function ProductDetail() {
     const { currentProduct } = useSelector((state) => state.products);
     const { user } = useSelector((state) => state.user);
     const thisProduct = currentProduct.product;
+
+    // State variables for managing visibility
+    const [showAddToCartButton, setShowAddToCartButton] = useState(true);
+
+    // Define the click handler for the "Add to Cart" button
+    const handleAddToCart = () => {
+        // Hide the "Add to Cart" button
+        setShowAddToCartButton(false);
+    };
 
     useEffect(() => {
         dispatch(fetchOneProductAction({ productId: productId }));
@@ -162,15 +180,58 @@ export default function ProductDetail() {
                         </Typography.Paragraph>
 
                         <div className={style.product_detail_row5}>
-                            <button className={classes.button}>
-                                Add To Cart
-                            </button>
+                            {showAddToCartButton ? (
+                                <button
+                                    className={classes.button}
+                                    onClick={handleAddToCart}
+                                >
+                                    Add To Cart
+                                </button>
+                            ) : (
+                                <div className={style.div_add_and_delete}>
+                                    <Tooltip title="Remove">
+                                        <Button>
+                                            <RemoveIcon
+                                                style={{ color: "white" }}
+                                            />
+                                        </Button>
+                                    </Tooltip>
+                                    <Tooltip title="Add">
+                                        <Button>
+                                            <AddIcon
+                                                style={{ color: "white" }}
+                                            />
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+                            )}
+
                             {user.id === thisProduct.user ? (
                                 <Link to={`/update-product/${productId}`}>
-                                    <Button>Edit</Button>
+                                    <Button
+                                        style={{
+                                            borderColor: "#CCCCCC",
+                                            color: "#535353",
+                                        }}
+                                        className={classes.edit_button}
+                                        variant="outlined"
+                                    >
+                                        Edit
+                                    </Button>
                                 </Link>
                             ) : (
-                                <Button disabled>Edit</Button>
+                                <Button
+                                    style={{
+                                        borderColor: "#CCCCCC",
+                                        color: "#535353",
+                                        textTransform: "none",
+                                    }}
+                                    className={classes.edit_button}
+                                    variant="outlined"
+                                    disabled
+                                >
+                                    Edit
+                                </Button>
                             )}
                         </div>
                     </div>
