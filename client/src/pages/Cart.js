@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   fetchCartAction,
   removeItem,
@@ -8,13 +8,18 @@ import {
 } from "app/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { List, Radio, Skeleton, Button, Card } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   const { cartItems, status } = useSelector((state) => state.cart);
+  if (!isAuthenticated) {
+    navigate("/");
+  }
   console.log(cartItems);
+
   useEffect(() => {
     dispatch(fetchCartAction({ userId: user.id }));
   }, [dispatch, user.id]);
@@ -50,9 +55,33 @@ export default function Cart() {
                 <h5>{item.name}</h5>
                 <p>${item.price}</p>
                 <Radio.Group>
-                  <Radio.Button>-</Radio.Button>
+                  <Radio.Button
+                    disabled={item.quantity === 1}
+                    onClick={() =>
+                      dispatch(
+                        dropProductFromCartAction({
+                          userId: user.id,
+                          productId: item.id,
+                        })
+                      )
+                    }
+                  >
+                    -
+                  </Radio.Button>
                   <Radio.Button type="text">{item.quantity}</Radio.Button>
-                  <Radio.Button>+</Radio.Button>
+                  <Radio.Button
+                    disabled={item.quantity === item.stockQuantity}
+                    onClick={() =>
+                      dispatch(
+                        addProductToCartAction({
+                          userId: user.id,
+                          productId: item.id,
+                        })
+                      )
+                    }
+                  >
+                    +
+                  </Radio.Button>
                 </Radio.Group>
 
                 <Button
