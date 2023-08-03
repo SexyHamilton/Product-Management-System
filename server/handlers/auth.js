@@ -7,7 +7,7 @@ exports.signin = async function (req, res, next) {
     const user = await db.User.findOne({
       email: req.body.email,
     });
-    const { id, email } = user;
+    const { id, email, cart } = user;
     //compare the password
     const isMatch = await user.comparePassword(req.body.password);
     if (isMatch) {
@@ -15,12 +15,14 @@ exports.signin = async function (req, res, next) {
         {
           id: user.id,
           email: user.email,
+          cart: user.cart,
         },
         process.env.JWT_SECRET_KEY
       );
       return res.status(200).json({
         id,
         email,
+        cart,
         token,
       });
     } else {

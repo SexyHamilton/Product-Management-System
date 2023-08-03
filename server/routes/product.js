@@ -5,6 +5,10 @@ const {
   updateProduct,
   getAllProducts,
   getProduct,
+  addProductToCart,
+  getProductsFromCart,
+  dropProductFromCart,
+  deleteProductFromCart,
 } = require("../handlers/product");
 const { loginRequired, ensureCorrectUser } = require("../middleware/auth");
 
@@ -17,6 +21,27 @@ router.patch(
   loginRequired,
   ensureCorrectUser,
   updateProduct
+);
+router.post(
+  "/:id/add/:productId",
+  loginRequired,
+  ensureCorrectUser,
+  addProductToCart
+);
+
+router.post(
+  "/:id/drop/:productId",
+  loginRequired,
+  ensureCorrectUser,
+  dropProductFromCart
+);
+router.get("/:id/cart", loginRequired, ensureCorrectUser, getProductsFromCart);
+
+router.post(
+  "/:id/cartDelete/:productId",
+  loginRequired,
+  ensureCorrectUser,
+  deleteProductFromCart
 );
 
 module.exports = router;

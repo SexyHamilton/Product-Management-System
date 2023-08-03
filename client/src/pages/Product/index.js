@@ -4,19 +4,29 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProductsAction } from "app/productSlice";
 import style from "./style.module.css";
 import { Link, Navigate } from "react-router-dom";
+import {
+  fetchCartAction,
+  addProductToCartAction,
+  dropProductFromCartAction,
+} from "app/cartSlice";
 
 export default function ProductList() {
   const dispatch = useDispatch();
   const { products, status } = useSelector((state) => state.products);
   const { user } = useSelector((state) => state.user);
+  const { cartItems } = useSelector((state) => state.cart);
   const [align] = useState("end");
   const [position] = useState("bottom");
   //   console.log(user);
-  //   console.log(products);
+  console.log(products);
+  console.log(cartItems);
 
   useEffect(() => {
     dispatch(fetchProductsAction());
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchCartAction({ userId: user.id }));
+  }, [dispatch, user.id]);
 
   return (
     <List
@@ -79,14 +89,37 @@ export default function ProductList() {
               </Link>
               {user.id && item.user && user.id === item.user._id ? (
                 <div>
-                  <Button>Add</Button>
+                  <Button
+                    onClick={() =>
+                      dispatch(
+                        addProductToCartAction({
+                          userId: user.id,
+                          productId: item._id,
+                        })
+                      )
+                    }
+                  >
+                    Add
+                  </Button>
                   <Link to={`/update-product/${item._id}`}>
                     <Button>Edit</Button>
                   </Link>
                 </div>
               ) : (
                 <div>
-                  <Button>Add</Button> <Button disabled>Edit</Button>
+                  <Button
+                    onClick={() =>
+                      dispatch(
+                        addProductToCartAction({
+                          userId: user.id,
+                          productId: item._id,
+                        })
+                      )
+                    }
+                  >
+                    Add
+                  </Button>{" "}
+                  <Button disabled>Edit</Button>
                 </div>
               )}
             </Card>

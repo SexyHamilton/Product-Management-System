@@ -28,3 +28,30 @@ export const fetchOneProduct = async ({ productId }) => {
     method: "GET",
   });
 };
+
+export const fetchCartFromTheUser = async ({ userId }) => {
+  return await apiCall({
+    url: `users/${userId}/cart`,
+    method: "GET",
+  });
+};
+export const removeWholeProductFromCart = async ({ userId, productId }) => {
+  return await apiCall({
+    url: `/users/${userId}/cartDelete/${productId}`,
+    method: "POST",
+  });
+};
+
+export const addProductToCart = async ({ userId, productId }) => {
+  return await apiCall({
+    url: `users/${userId}/add/${productId}`,
+    method: "POST",
+  });
+};
+
+export const dropProductFromCart = async ({ userId, productId }) => {
+  return await apiCall({
+    url: `users/${userId}/drop/${productId}`,
+    method: "POST",
+  });
+};
