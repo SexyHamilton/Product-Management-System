@@ -75,6 +75,8 @@
     border-radius: 5px;
     width: 133px;
     height: 40px;
+    display: flex;
+    align-items: center;
 }
 
 .list_div_add_and_delete {
@@ -82,4 +84,37 @@
     border-radius: 5px;
     width: 110px;
     height: 26px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.add_delete_btn {
+    padding: 0;
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn_div {
+    display: flex;
+    gap: 6px;
+}
+
+.btn_quantity {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-weight: 600;
+}
+
+.btn_quantity_home {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-weight: 600;
 }
