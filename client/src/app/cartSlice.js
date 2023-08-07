@@ -113,6 +113,15 @@ const cartSlice = createSlice({
       state.status = "pending";
     });
     builder.addCase(addProductToCartAction.fulfilled, (state, action) => {
+      let items = state.cartItems;
+      let newItem = action.payload;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].id === newItem._id) {
+          items[i].quantity += 1;
+          break;
+        }
+      }
+      state.cartItems = items;
       state.status = "succeeded";
     });
     builder.addCase(dropProductFromCartAction.rejected, (state, action) => {
@@ -122,6 +131,15 @@ const cartSlice = createSlice({
       state.status = "pending";
     });
     builder.addCase(dropProductFromCartAction.fulfilled, (state, action) => {
+      let items = state.cartItems;
+      let newItem = action.payload;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].id === newItem._id) {
+          items[i].quantity -= 1;
+          break;
+        }
+      }
+      state.cartItems = items;
       state.status = "succeeded";
     });
     builder.addCase(
