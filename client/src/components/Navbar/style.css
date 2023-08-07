@@ -38,6 +38,7 @@
 
 .navbar-menu {
     float: left;
+    display: flex;
 }
 
 .navbar-menu .ant-layout-header {
