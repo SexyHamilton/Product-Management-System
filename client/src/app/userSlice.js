@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { signIn, signUp } from "services/auth";
+import { signIn, signUp, updatePassword } from "services/auth";
+import { removeError, addError } from "./errorSlice";
 
 const initialState = {
   user: {},
@@ -13,12 +14,12 @@ export const authUser = createAsyncThunk(
     try {
       const user = await signIn(data);
       localStorage.setItem("token", user.token);
-      // thunkAPI.dispatch(removeError());
+      thunkAPI.dispatch(removeError());
       return user;
     } catch (error) {
       const { message } = error;
       //add error into reducer
-      //thunkAPI
+      thunkAPI.dispatch(addError(message));
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -29,11 +30,26 @@ export const signUpUser = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const user = await signUp(data);
-      // thunkAPI.dispatch(removeError());
+      thunkAPI.dispatch(removeError());
       return user;
     } catch (error) {
       const { message } = error;
-      // thunkAPI.dispatch(addError(message));
+      thunkAPI.dispatch(addError(message));
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "currentUser/updatePassword",
+  async (data, thunkAPI) => {
+    try {
+      const user = await updatePassword(data);
+      thunkAPI.dispatch(removeError());
+      return user;
+    } catch (error) {
+      const { message } = error;
+      thunkAPI.dispatch(addError(message));
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -75,6 +91,15 @@ const userSlice = createSlice({
     });
     builder.addCase(signUpUser.pending, (state, action) => {
       state.status = "pending";
+    });
+    builder.addCase(updateUser.pending, (state, action) => {
+      state.status = "pending";
+    });
+    builder.addCase(updateUser.rejected, (state, action) => {
+      state.status = "failed";
+    });
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      state.status = "succeeded";
     });
   },
 });

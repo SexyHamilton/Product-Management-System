@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Typography } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { updateUser } from "app/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -32,20 +35,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function UpdatePassword() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      let newOne = {
+        email: email,
+        password: password,
+      };
+      console.log(newOne);
+      dispatch(updateUser(newOne)).then(() => {
+        navigate("/login");
+      });
+    } catch (err) {
+      alert(err);
+    }
   };
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
       <Typography variant="h4">Update your password</Typography>
       <br />
       <Typography variant="body2">
-        Enter your email link, we will send you the recovery link
+        Enter your email, and your new password.
       </Typography>
       <br />
 
@@ -57,6 +78,17 @@ export default function UpdatePassword() {
         color="secondary"
         value={email}
         onChange={handleEmailChange}
+        required
+      />
+      <TextField
+        className={classes.textField}
+        id="signup-password"
+        label="Password"
+        type="password"
+        variant="outlined"
+        color="secondary"
+        value={password}
+        onChange={handlePasswordChange}
         required
       />
 

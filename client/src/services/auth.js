@@ -15,3 +15,10 @@ export const signIn = async (data) => {
     data,
   });
 };
+export const updatePassword = async (data) => {
+  return await apiCall({
+    url: "/auth/update",
+    method: "POST",
+    data,
+  });
+};

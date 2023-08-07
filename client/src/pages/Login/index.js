@@ -37,7 +37,6 @@ export default function LogIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -51,14 +50,18 @@ export default function LogIn() {
 
   const onSubmit = (data) => {
     data.preventDefault();
-    let user = {
-      email: email,
-      password: password,
-    };
-    console.log(user);
-    dispatch(authUser(user)).then(() => {
-      navigate("/");
-    });
+    try {
+      let user = {
+        email: email,
+        password: password,
+      };
+      console.log(user);
+      dispatch(authUser(user)).then(() => {
+        navigate("/");
+      });
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

@@ -39,6 +39,23 @@ exports.signin = async function (req, res, next) {
   }
 };
 
+exports.updatePassword = async function (req, res, next) {
+  console.log(req.body.email, req.body.password);
+  try {
+    const user = await db.User.findOne({
+      email: req.body.email,
+    });
+    user.password = req.body.password;
+    await user.save();
+    return res.status(200).json(user);
+  } catch (err) {
+    return next({
+      status: 400,
+      message: "wrong password",
+    });
+  }
+};
+
 exports.signup = async function (req, res, next) {
   //create new user from req.body
   try {

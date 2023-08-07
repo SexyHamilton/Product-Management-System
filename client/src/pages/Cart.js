@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { List, Radio, Skeleton, Button, Card } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { TextField } from "@material-ui/core";
+import { TextField, Typography } from "@material-ui/core";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export default function Cart() {
   const [loading, setLoading] = useState(true);
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const { cartItems, status } = useSelector((state) => state.cart);
-  const [discount, setDiscount] = useState(null);
+  const [discount, setDiscount] = useState("");
   const [total, setTotal] = useState(0);
   const [promotionUsed, setPromotionUsed] = useState(false);
   const PROMOTION_CODE = "114514";
@@ -78,7 +78,7 @@ export default function Cart() {
                       margin: "auto",
                     }}
                   />
-                  <h5>{item.name}</h5>
+                  <Typography>{item.name}</Typography>
                   <p>${item.price}</p>
                   <Radio.Group>
                     <Radio.Button
@@ -131,9 +131,8 @@ export default function Cart() {
         />
         <Card>
           <label for="discount"> Apply Discount Code</label>
-          <TextField
+          <input
             id="discount"
-            variant="outlined"
             placeholder="20 DOLLAR OFF"
             value={discount}
             onChange={handleDiscount}
@@ -147,21 +146,23 @@ export default function Cart() {
           </Button>
           <h4 className="left">
             Subtotal:
-            <h4 className="right">${total.toFixed(2)}</h4>
+            <Typography className="right">${total.toFixed(2)}</Typography>
           </h4>
           <h4 className="left">
             Tax:
-            <h4 className="right">${0.1 * total.toFixed(2)}</h4>
+            <Typography className="right">${0.1 * total.toFixed(2)}</Typography>
           </h4>
           <h4 className="left">
             Discount:
-            <h4 className="right">-${promotionUsed ? "20.00" : "0.00"}</h4>
+            <Typography className="right">
+              -${promotionUsed ? "20.00" : "0.00"}
+            </Typography>
           </h4>
           <h4 className="left">
             Estimated Total:
-            <h4 className="right">
+            <Typography className="right">
               ${promotionUsed ? (total - 20).toFixed(2) : total.toFixed(2)}
-            </h4>
+            </Typography>
           </h4>
           <Button type="primary"> Continue to checkout</Button>
         </Card>
