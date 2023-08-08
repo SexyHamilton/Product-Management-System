@@ -8,22 +8,18 @@ import {
 } from "app/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { List, Radio, Skeleton, Button, Card } from "antd";
-import { Link, useNavigate } from "react-router-dom";
-import { TextField, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { Typography } from "@material-ui/core";
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const { cartItems, status } = useSelector((state) => state.cart);
   const [discount, setDiscount] = useState("");
   const [total, setTotal] = useState(0);
   const [promotionUsed, setPromotionUsed] = useState(false);
   const PROMOTION_CODE = "114514";
-  if (!isAuthenticated) {
-    navigate("/");
-  }
 
   useEffect(() => {
     dispatch(fetchCartAction({ userId: user.id }));

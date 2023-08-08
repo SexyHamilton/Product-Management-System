@@ -67,6 +67,7 @@ const userSlice = createSlice({
       state.user = {};
       state.status = "idle";
       localStorage.removeItem("token");
+      localStorage.removeItem("thisProduct");
     },
   },
   extraReducers: (builder) => {

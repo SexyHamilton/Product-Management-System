@@ -62,7 +62,9 @@ export const fetchOneProductAction = createAsyncThunk(
   "products/fetchOneProduct",
   async (data, thunkAPI) => {
     try {
-      const product = fetchOneProduct(data);
+      const product = await fetchOneProduct(data);
+      const productStr = JSON.stringify(product);
+      localStorage.setItem("thisProduct", productStr);
       thunkAPI.dispatch(removeError());
       return product;
     } catch (error) {

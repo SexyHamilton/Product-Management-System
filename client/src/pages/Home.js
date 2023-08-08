@@ -24,11 +24,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
   const classes = useStyles();
-  const { isAuthenticated } = useSelector((state) => state.user);
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: "/" }} />;
-  }
 
   return (
     <div>
