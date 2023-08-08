@@ -1,7 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ProductTimeline from "pages/Product";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";

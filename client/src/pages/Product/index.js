@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductsAction } from "app/productSlice";
 import style from "./style.module.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Tooltip from "@material-ui/core/Tooltip";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "10px",
     "border-radius": "5px",
     textTransform: "none",
-    // margin: theme.spacing(1),
     backgroundColor: "#5048E5",
     color: "#FFFFFF",
     "&:hover": {
@@ -242,7 +241,6 @@ export default function ProductList() {
                   <Button
                     style={{
                       borderColor: "#CCCCCC",
-                      // color: "#535353",
                       width: "102px",
                       height: "26px",
                       fontSize: "10px",

@@ -4,6 +4,7 @@ import { TextField, Button, Typography } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { updateUser } from "app/userSlice";
 import { useNavigate } from "react-router-dom";
+import validation from "validation/product";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -50,12 +51,13 @@ export default function UpdatePassword() {
     event.preventDefault();
     try {
       let newOne = {
-        email: email,
-        password: password,
+        email: validation.checkEmail(email),
+        password: validation.checkPassword(password),
       };
       console.log(newOne);
       dispatch(updateUser(newOne)).then(() => {
         navigate("/login");
+        alert("You have successfully update password!");
       });
     } catch (err) {
       alert(err);

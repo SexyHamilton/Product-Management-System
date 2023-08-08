@@ -8,7 +8,7 @@ import {
 } from "app/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { List, Radio, Skeleton, Button, Card } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
 import style from "./style.module.css";
@@ -83,14 +83,6 @@ function Cart({ onCartClose }) {
     return (
       <div>
         <h2>Loading...</h2>
-      </div>
-    );
-  } else if (cartItems.length === 0) {
-    return (
-      <div>
-        <h1>
-          Cart is Empty <Link to="/">Go Shopping</Link>
-        </h1>
       </div>
     );
   } else {

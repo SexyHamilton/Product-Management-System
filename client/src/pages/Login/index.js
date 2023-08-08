@@ -1,10 +1,11 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { authUser } from "app/userSlice";
 import styles from "./style.module.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button } from "@material-ui/core";
 import { useState } from "react";
+import validation from "validation/product";
 const useStyles = makeStyles((theme) => ({
   form: {
     display: "flex",
@@ -53,8 +54,8 @@ export default function LogIn() {
     data.preventDefault();
     try {
       let user = {
-        email: email,
-        password: password,
+        email: validation.checkEmail(email),
+        password: validation.checkPassword(password),
       };
       dispatch(authUser(user)).then(() => {
         navigate("/");

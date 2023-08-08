@@ -9,40 +9,37 @@ import { useSelector } from "react-redux";
 const RightMenu = ({ mode }) => {
   const [cartVisible, setCartVisible] = useState(false);
   const { isAuthenticated } = useSelector((state) => state.user);
-  console.log(cartVisible);
 
   const handleCartClick = () => {
     setCartVisible(!cartVisible);
   };
+
   if (!isAuthenticated) {
     return (
       <div>
+        <Link className="header__homelink">
+          <ShoppingCartOutlined />
+          $0.00
+        </Link>
+      </div>
+    );
+  } else {
+    return (
+      <div>
         <Menu mode={mode}>
-          <Menu.Item key="Chuwa-management">
-            <Link className="header__homelink">
+          <Menu.Item>
+            <Link className="header__homelink" onClick={handleCartClick}>
               <ShoppingCartOutlined />
-              $0.00
             </Link>
           </Menu.Item>
+
+          {/* <Menu.Item key="contact">Contact Us</Menu.Item> */}
         </Menu>
+        {cartVisible && <Cart onCartClose={() => setCartVisible(false)} />}{" "}
+        {/* Render the Cart component when cartVisible is true */}
       </div>
     );
   }
-
-  return (
-    <div>
-      <Menu mode={mode}>
-        <Menu.Item key="Chuwa-management">
-          <Link className="header__homelink" onClick={handleCartClick}>
-            <ShoppingCartOutlined />
-          </Link>
-        </Menu.Item>
-        {/* <Menu.Item key="contact">Contact Us</Menu.Item> */}
-      </Menu>
-      {cartVisible && <Cart onCartClose={() => setCartVisible(false)} />}{" "}
-      {/* Render the Cart component when cartVisible is true */}
-    </div>
-  );
 };
 
 export default RightMenu;

@@ -4,6 +4,7 @@ import { TextField, Button } from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
 import { signUpUser } from "app/userSlice";
 import { useDispatch } from "react-redux";
+import validation from "validation/product";
 const useStyles = makeStyles((theme) => ({
   form: {
     display: "flex",
@@ -48,12 +49,16 @@ export default function Signup() {
 
   const onSubmit = (data) => {
     data.preventDefault();
-    let newUser = {
-      email: email,
-      password: password,
-    };
-    dispatch(signUpUser(newUser)).then(() => navigate("/login"));
-    alert("You have successfully create an account!");
+    try {
+      let newUser = {
+        email: validation.checkEmail(email),
+        password: validation.checkPassword(password),
+      };
+      dispatch(signUpUser(newUser)).then(() => navigate("/login"));
+      alert("You have successfully create an account!");
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (

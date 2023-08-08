@@ -105,6 +105,7 @@ const cartSlice = createSlice({
     });
     builder.addCase(fetchCartAction.rejected, (state, action) => {
       state.status = "failed";
+      state.cartItems = [];
     });
     builder.addCase(addProductToCartAction.rejected, (state, action) => {
       state.status = "failed";

@@ -9,13 +9,6 @@ export default function Layout() {
   const isMobile = useMediaQuery("(max-width: 450px)");
   console.log(isMobile);
 
-  const headerStyle = useMemo(
-    () => ({
-      height: "64px",
-    }),
-    []
-  );
-
   const contentStyle = useMemo(
     () => ({
       height: "calc(100vh - 64px - 69px)",
