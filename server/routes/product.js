@@ -13,7 +13,7 @@ const {
 const { loginRequired, ensureCorrectUser } = require("../middleware/auth");
 
 //
-router.get("/:id/products", loginRequired, getAllProducts);
+router.get("/:id/products", getAllProducts);
 router.get("/products/:product_id", getProduct);
 router.post("/:id/products", loginRequired, createProduct);
 router.patch(

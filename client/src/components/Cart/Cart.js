@@ -54,7 +54,11 @@ function Cart({ onCartClose }) {
   const checkDiscount = (event) => {
     if (discount === PROMOTION_CODE) {
       // setTotal(0.8 * total);
-      setPromotionUsed(true);
+      if (cartItems.length !== 0) {
+        setPromotionUsed(true);
+      }
+    } else {
+      alert("Invalid Promotion Code");
     }
   };
   const handleCartClose = () => {

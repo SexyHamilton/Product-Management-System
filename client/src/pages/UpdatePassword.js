@@ -57,7 +57,6 @@ export default function UpdatePassword() {
       console.log(newOne);
       dispatch(updateUser(newOne)).then(() => {
         navigate("/login");
-        alert("You have successfully update password!");
       });
     } catch (err) {
       alert(err);

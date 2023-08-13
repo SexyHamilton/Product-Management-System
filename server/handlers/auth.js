@@ -51,7 +51,7 @@ exports.updatePassword = async function (req, res, next) {
   } catch (err) {
     return next({
       status: 400,
-      message: "wrong password",
+      message: "The email doesn't exist",
     });
   }
 };
@@ -59,21 +59,28 @@ exports.updatePassword = async function (req, res, next) {
 exports.signup = async function (req, res, next) {
   //create new user from req.body
   try {
-    const user = await db.User.create(req.body);
-    const { id, email } = user;
-    //generate jwt token
-    const token = await jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-      },
-      process.env.JWT_SECRET_KEY
-    );
-    return res.status(200).json({
-      id,
-      email,
-      token,
+    const check = await db.User.findOne({
+      email: req.body.email,
     });
+    if (check) {
+      throw new Error("Sorry, the email is taken");
+    } else {
+      const user = await db.User.create(req.body);
+      const { id, email } = user;
+      //generate jwt token
+      const token = await jwt.sign(
+        {
+          id: user.id,
+          email: user.email,
+        },
+        process.env.JWT_SECRET_KEY
+      );
+      return res.status(200).json({
+        id,
+        email,
+        token,
+      });
+    }
   } catch (err) {
     if (err.code === 11000) {
       err.message = "Sorry, the email is taken";

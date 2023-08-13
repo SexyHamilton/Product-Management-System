@@ -55,7 +55,6 @@ export default function Signup() {
         password: validation.checkPassword(password),
       };
       dispatch(signUpUser(newUser)).then(() => navigate("/login"));
-      alert("You have successfully create an account!");
     } catch (e) {
       alert(e);
     }

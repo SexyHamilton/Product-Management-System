@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import ProductTimeline from "pages/Product";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
   const classes = useStyles();
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   return (
     <div>
@@ -55,7 +57,9 @@ export default function Home() {
           </MenuItem>
         </TextField>
         <Link to="new-product">
-          <button className={classes.button}>Add Product</button>
+          <button className={classes.button} disabled={!isAuthenticated}>
+            Add Product
+          </button>
         </Link>
       </div>
 

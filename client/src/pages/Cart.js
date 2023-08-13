@@ -37,6 +37,8 @@ export default function Cart() {
     if (discount === PROMOTION_CODE) {
       // setTotal(0.8 * total);
       setPromotionUsed(true);
+    } else {
+      alert("Invalid Promotion Code");
     }
   };
   if (loading) {

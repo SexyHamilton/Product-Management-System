@@ -20,6 +20,7 @@ export const authUser = createAsyncThunk(
       const { message } = error;
       //add error into reducer
       thunkAPI.dispatch(addError(message));
+      alert(message);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -35,6 +36,7 @@ export const signUpUser = createAsyncThunk(
     } catch (error) {
       const { message } = error;
       thunkAPI.dispatch(addError(message));
+      alert(message);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -50,6 +52,7 @@ export const updateUser = createAsyncThunk(
     } catch (error) {
       const { message } = error;
       thunkAPI.dispatch(addError(message));
+      alert(message);
       return thunkAPI.rejectWithValue(message);
     }
   }

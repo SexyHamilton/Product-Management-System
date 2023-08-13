@@ -2,7 +2,6 @@ const db = require("../models");
 
 //POST - /users/:id/products
 exports.createProduct = async function (req, res, next) {
-  console.log(req.params.id);
   try {
     // create a product
     const product = await db.Product.create({
@@ -15,10 +14,9 @@ exports.createProduct = async function (req, res, next) {
       user: req.params.id,
     });
     //find the user
-    console.log(product);
     const user = await db.User.findById(req.params.id);
     //push the created product into user's product list
-    await user.products.push(product.id);
+    user.products.push(product.id);
     await user.save();
     const returnProduct = await db.Product.findById(product._id).populate(
       "user",
