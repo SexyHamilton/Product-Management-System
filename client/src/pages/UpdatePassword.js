@@ -54,7 +54,6 @@ export default function UpdatePassword() {
         email: validation.checkEmail(email),
         password: validation.checkPassword(password),
       };
-      console.log(newOne);
       dispatch(updateUser(newOne)).then(() => {
         navigate("/login");
       });

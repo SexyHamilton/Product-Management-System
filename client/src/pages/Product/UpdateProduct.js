@@ -32,6 +32,7 @@ export default function UpdateProduct() {
         setCategory(product.category);
         setPrice(product.price);
         setStock_quantity(product.quantity);
+        console.log(product.quantity);
         setLink(product.link);
         //set all previous data then render these data.
         setLoading(false);
@@ -100,6 +101,7 @@ export default function UpdateProduct() {
         quantity: validation.checkQuantity(stock_quantity),
         link: validation.checkLink(link),
       };
+      console.log(updateProduct.quantity);
       dispatch(
         updateProductAction({
           userId: user.id,

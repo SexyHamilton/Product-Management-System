@@ -184,6 +184,7 @@ export default function ProductDetail() {
                 <button
                   className={classes.button}
                   onClick={() => handleAddToCart(user.id, productId)}
+                  disabled={thisProduct.quantity === 0}
                 >
                   Add To Cart
                 </button>
@@ -198,7 +199,10 @@ export default function ProductDetail() {
                   </Tooltip>
                   <p className={style.btn_quantity}>{itemQuantity}</p>
                   <Tooltip title="Add">
-                    <Button onClick={() => handleAddToCart(user.id, productId)}>
+                    <Button
+                      onClick={() => handleAddToCart(user.id, productId)}
+                      disabled={itemQuantity === thisProduct.quantity}
+                    >
                       <AddIcon style={{ color: "white" }} />
                     </Button>
                   </Tooltip>

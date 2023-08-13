@@ -39,7 +39,9 @@ exports.updateProduct = async function (req, res, next) {
       product.description = req.body.description || product.description;
       product.category = req.body.category || product.category;
       product.price = req.body.price || product.price;
-      product.quantity = req.body.quantity || product.quantity;
+      product.quantity = req.body.quantity;
+      console.log(req.body.quantity);
+      console.log(product.quantity);
       product.link = req.body.link || product.link;
 
       const updatedProduct = await product.save();
